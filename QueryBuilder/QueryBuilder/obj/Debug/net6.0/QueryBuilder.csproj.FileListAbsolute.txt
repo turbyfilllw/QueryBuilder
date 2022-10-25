@@ -1,0 +1,15 @@
+/Users/logan/Projects/QueryBuilder/QueryBuilder/bin/Debug/net6.0/QueryBuilder
+/Users/logan/Projects/QueryBuilder/QueryBuilder/bin/Debug/net6.0/QueryBuilder.deps.json
+/Users/logan/Projects/QueryBuilder/QueryBuilder/bin/Debug/net6.0/QueryBuilder.runtimeconfig.json
+/Users/logan/Projects/QueryBuilder/QueryBuilder/bin/Debug/net6.0/QueryBuilder.dll
+/Users/logan/Projects/QueryBuilder/QueryBuilder/bin/Debug/net6.0/QueryBuilder.pdb
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/QueryBuilder.csproj.AssemblyReference.cache
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/QueryBuilder.GeneratedMSBuildEditorConfig.editorconfig
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/QueryBuilder.AssemblyInfoInputs.cache
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/QueryBuilder.AssemblyInfo.cs
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/QueryBuilder.csproj.CoreCompileInputs.cache
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/QueryBuilder.dll
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/refint/QueryBuilder.dll
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/QueryBuilder.pdb
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/QueryBuilder.genruntimeconfig.cache
+/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/Debug/net6.0/ref/QueryBuilder.dll
