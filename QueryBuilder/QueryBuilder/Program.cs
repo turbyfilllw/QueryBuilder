@@ -1,3 +1,17 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using QueryBuilder;
+using Microsoft.Data.Sqlite;
+
+public class Program
+{
+    private static string connection =
+        "Data Source = " + ProjectRoot.Root + Path.DirectorySeparatorChar +
+        "Data" + Path.DirectorySeparatorChar + "Lab 5.db";
+
+    static void Main(String[] args)
+    {
+        Console.WriteLine(connection);
+        Console.ReadKey();
+    }
+}
+
 

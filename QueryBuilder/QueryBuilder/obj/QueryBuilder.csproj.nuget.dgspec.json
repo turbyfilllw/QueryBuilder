@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/logan/Projects/QueryBuilder/QueryBuilder/QueryBuilder.csproj": {}
+    "/Users/logan/Projects/QueryBuilder/QueryBuilder/QueryBuilder/QueryBuilder.csproj": {}
   },
   "projects": {
-    "/Users/logan/Projects/QueryBuilder/QueryBuilder/QueryBuilder.csproj": {
+    "/Users/logan/Projects/QueryBuilder/QueryBuilder/QueryBuilder/QueryBuilder.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/logan/Projects/QueryBuilder/QueryBuilder/QueryBuilder.csproj",
+        "projectUniqueName": "/Users/logan/Projects/QueryBuilder/QueryBuilder/QueryBuilder/QueryBuilder.csproj",
         "projectName": "QueryBuilder",
-        "projectPath": "/Users/logan/Projects/QueryBuilder/QueryBuilder/QueryBuilder.csproj",
+        "projectPath": "/Users/logan/Projects/QueryBuilder/QueryBuilder/QueryBuilder/QueryBuilder.csproj",
         "packagesPath": "/Users/logan/.nuget/packages/",
-        "outputPath": "/Users/logan/Projects/QueryBuilder/QueryBuilder/obj/",
+        "outputPath": "/Users/logan/Projects/QueryBuilder/QueryBuilder/QueryBuilder/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/logan/.nuget/NuGet/NuGet.Config"
@@ -38,6 +38,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
