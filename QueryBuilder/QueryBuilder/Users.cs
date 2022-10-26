@@ -3,7 +3,7 @@ using QueryBuilder.Models;
 
 namespace QueryBuilder
 {
-	public class Users : IComparable, IClassModels
+	public class Users : IClassModels
 	{
 		public int Id { get; set; }
 		public string UserName { get; set; }
@@ -28,15 +28,11 @@ namespace QueryBuilder
 			this.PhoneNumber = PhoneNumber;
 		}
 
-		public int CompareTo(object? obj)
-		{
-			Users users = obj as Users;
-			return this.UserName.CompareTo(users.Email);
-		}
+		
         public override string ToString()
         {
             return
-				$"{Id} : {UserName} : {UserAddress} : {OtherUserDetails} : " +
+				$"{Id} - {UserName} : {UserAddress} : {OtherUserDetails} : " +
 				$"{AmountOfFine} : {Email} : {PhoneNumber}";
         }
     }
