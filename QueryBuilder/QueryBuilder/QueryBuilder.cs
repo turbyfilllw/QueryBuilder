@@ -50,6 +50,8 @@ namespace QueryBuilder
 			return list;
 		}
 
+		
+
 		public void Dispose()
 		{
 			connection.Close();
