@@ -5,23 +5,27 @@ using QueryBuilder.Models;
 public class Program
 {
     static string connection = "Data Source = " + ProjectRoot.Root + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "Lab 5.db";
-
+    
     static void Main(String[] args)
+    {
+        Menu();
+    }
+
+    private static void Menu()
     {
         bool menu = true;
         int entry;
-                //Console.WriteLine(connection);
+        
         using (var builder = new QueryBuilder.QueryBuilder(connection))
         {
-            //Console.WriteLine(builder.ReadAll<Users>());
             var users = builder.ReadAll<Users>();
             var books = builder.ReadAll<Books>();
             var authors = builder.ReadAll<Author>();
             var categories = builder.ReadAll<Categories>();
             var loans = builder.ReadAll<BooksOutOnLoan>();
-
             
-            while(menu)
+
+            while (menu)
             {
                 Console.WriteLine($"1. Display everything in the database\n" +
                                   $"2. Display all users in the database\n" +
@@ -30,13 +34,15 @@ public class Program
                                   $"5. Display all categories in the database\n" +
                                   $"6. Display all books on loan in the database\n" +
                                   $"7. Get a specific entry in the database\n" +
-                                  $"8. Exit");
+                                  $"8. Delete a table from the database\n" +
+                                  $"9. Exit");
 
                 var choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-
+                        GetAllFromDB(users, books, authors, categories, loans);
+                        MoveOn();
                         break;
                     case 2:
                         GetAllUsers(users);
@@ -67,13 +73,13 @@ public class Program
                                           $"5. Books on loan\n");
 
                         choice = Convert.ToInt32(Console.ReadLine());
-                        switch(choice)
+                        switch (choice)
                         {
                             case 1:
                                 Console.Clear();
                                 Console.WriteLine("Which entry?: ");
                                 entry = Convert.ToInt32(Console.ReadLine());
-                                GetSpecificEntry<Users>(builder,entry);
+                                GetSpecificEntry<Users>(builder, entry);
                                 break;
                             case 2:
                                 Console.Clear();
@@ -107,20 +113,67 @@ public class Program
                         MoveOn();
                         break;
                     case 8:
+                        Console.WriteLine($"Which class?\n" +
+                                          $"1. Users\n" +
+                                          $"2. Books\n" +
+                                          $"3. Authors\n" +
+                                          $"4. Categories\n" +
+                                          $"5. Books on loan\n");
+
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                Console.Clear();
+                                DeleteFromDatabase<Users>(builder);
+                                break;
+                            case 2:
+                                Console.Clear();
+                                DeleteFromDatabase<Books>(builder);
+                                break;
+                            case 3:
+                                Console.Clear();
+                                DeleteFromDatabase<Author>(builder);
+                                break;
+                            case 4:
+                                Console.Clear();
+                                DeleteFromDatabase<Categories>(builder);
+                                break;
+                            case 5:
+                                Console.Clear();
+                                DeleteFromDatabase<BooksOutOnLoan>(builder);
+                                break;
+                            default:
+                                Console.Clear();
+                                Console.WriteLine("Out of range");
+                                break;
+                        }
+                        MoveOn();
+                        break;
+                    case 9:
                         menu = false;
                         break;
                     default:
                         Console.WriteLine("Invalid Entry");
+                        MoveOn();
                         break;
                 }
             }
-            
-            //Console.WriteLine(builder.Read<Author>(1));
-            //Console.WriteLine("-----------------------\n");
-
-            //Console.WriteLine("Deleting from database...");
-            //DeleteFromDatabase<BooksOutOnLoan>(builder);
         }
+    }
+
+    private static void GetAllFromDB(List<Users> users, List<Books> books,List<Author> authors, List<Categories> categories, List<BooksOutOnLoan> loans)
+    {
+
+        GetAllUsers(users);
+        Console.WriteLine("------------------------------");
+        GetAllBooks(books);
+        Console.WriteLine("------------------------------");
+        GetAllAuthors(authors);
+        Console.WriteLine("------------------------------");
+        GetAllCategories(categories);
+        Console.WriteLine("------------------------------");
+        GetBooksOnLoan(loans);
     }
 
     private static void DeleteFromDatabase<T>(QueryBuilder.QueryBuilder builder) where T : IClassModels, new()

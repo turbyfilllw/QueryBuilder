@@ -5,9 +5,9 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="QueryBuilder/Program.cs">
     <Files>
-      <File FileName="QueryBuilder/Program.cs" Line="15" Column="13" />
-      <File FileName="QueryBuilder/DatabaseBuilder.cs" Line="17" Column="41" />
-      <File FileName="QueryBuilder/Users.cs" Line="44" Column="1" />
+      <File FileName="QueryBuilder/Program.cs" Line="167" Column="1" />
+      <File FileName="QueryBuilder/DatabaseBuilder.cs" Line="112" Column="25" />
+      <File FileName="QueryBuilder/BooksOutOnLoan.cs" Line="31" Column="60" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
