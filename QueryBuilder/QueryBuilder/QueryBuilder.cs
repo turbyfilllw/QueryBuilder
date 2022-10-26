@@ -66,11 +66,24 @@ namespace QueryBuilder
 		}
 
 
-		public void Create<T>(T obj) where T : IClassModels, new()
+		public void Create(Author a)
 		{
-			var command = connection.CreateCommand();
-			command.CommandText = $"INSERT INTO {typeof(T).Name}";
+			//var command = connection.CreateCommand();
+			var commandText = @"INSERT INTO Author
+								VALUES($Id, $FirstName, $SurName)";
+			//command.CommandText = $"INSERT INTO {typeof(T).Name}";
+
+			using (var command = new SqliteCommand(commandText, connection))
+			{
+				command.Parameters.AddWithValue("$Id", a.Id).SqliteType = SqliteType.Integer;
+				command.Parameters.AddWithValue("$FirstName", a.FirstName).SqliteType = SqliteType.Text;
+				command.Parameters.AddWithValue("$SurName", a.SurName).SqliteType = SqliteType.Text;
+				command.ExecuteNonQuery();
+				Console.WriteLine("Record has been added!");
+            }
 		}
+
+
 		/// <summary>
 		/// Reads a specific object from the database
 		/// given an Id
@@ -109,6 +122,10 @@ namespace QueryBuilder
             
         }
 
+		/// <summary>
+		/// Deletes a table from the database
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
 		public void Delete<T>() where T : IClassModels, new()
 		{
 			var command = connection.CreateCommand();
@@ -117,6 +134,30 @@ namespace QueryBuilder
 			command.CommandType = System.Data.CommandType.Text;
 			command.ExecuteNonQuery();
 		}
+
+		/// <summary>
+		/// Updates a record from the database
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="Id"></param>
+		public void Update(Author a, int Id)
+		{
+			var commandText = @"UPDATE Author
+								SET Id = $Id,
+								FirstName = $FirstName,
+								SurName = $SurName
+								WHERE Id = $Id";
+
+            using (var command = new SqliteCommand(commandText, connection))
+            {
+                command.Parameters.AddWithValue("$Id", a.Id).SqliteType = SqliteType.Integer;
+                command.Parameters.AddWithValue("$FirstName", a.FirstName).SqliteType = SqliteType.Text;
+                command.Parameters.AddWithValue("$SurName", a.SurName).SqliteType = SqliteType.Text;
+                command.ExecuteNonQuery();
+                Console.WriteLine("Record has been updated!");
+            }
+
+        }
 
         public void Dispose()
 		{
