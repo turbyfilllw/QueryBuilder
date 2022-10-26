@@ -8,7 +8,29 @@ public class Program
     
     static void Main(String[] args)
     {
-        Menu();
+
+        using (var builder = new QueryBuilder.QueryBuilder(connection))
+        {
+            var users = builder.ReadAll<Users>();
+            var books = builder.ReadAll<Books>();
+            var authors = builder.ReadAll<Author>();
+            var categories = builder.ReadAll<Categories>();
+            var loans = builder.ReadAll<BooksOutOnLoan>();
+
+            GetAllAuthors(authors);
+            Author a = new Author(6, "Logan", "Turbyfill");
+            
+            builder.Create(a);
+            authors = builder.ReadAll<Author>();
+            GetAllAuthors(authors);
+            a = new Author(6, "LoBAN", "TurbyHILL");
+            builder.Update(a, 6);
+            authors = builder.ReadAll<Author>();
+            GetAllAuthors(authors);
+        }
+
+        Console.ReadKey();
+        //Menu();
     }
 
     private static void Menu()
@@ -126,22 +148,27 @@ public class Program
                             case 1:
                                 Console.Clear();
                                 DeleteFromDatabase<Users>(builder);
+                                Console.WriteLine("Entry has been deleted...");
                                 break;
                             case 2:
                                 Console.Clear();
                                 DeleteFromDatabase<Books>(builder);
+                                Console.WriteLine("Entry has been deleted...");
                                 break;
                             case 3:
                                 Console.Clear();
                                 DeleteFromDatabase<Author>(builder);
+                                Console.WriteLine("Entry has been deleted...");
                                 break;
                             case 4:
                                 Console.Clear();
                                 DeleteFromDatabase<Categories>(builder);
+                                Console.WriteLine("Entry has been deleted...");
                                 break;
                             case 5:
                                 Console.Clear();
                                 DeleteFromDatabase<BooksOutOnLoan>(builder);
+                                Console.WriteLine("Entry has been deleted...");
                                 break;
                             default:
                                 Console.Clear();
