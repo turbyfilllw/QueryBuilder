@@ -19,18 +19,23 @@ public class Program
 
             GetAllAuthors(authors);
             Author a = new Author(6, "Logan", "Turbyfill");
-            
+
+            //Console.WriteLine("Adding an author...");
+
             builder.Create(a);
             authors = builder.ReadAll<Author>();
+            
             GetAllAuthors(authors);
+
             a = new Author(6, "LoBAN", "TurbyHILL");
             builder.Update(a, 6);
             authors = builder.ReadAll<Author>();
             GetAllAuthors(authors);
         }
 
+        Console.WriteLine("Press a key to enter the menu...");
         Console.ReadKey();
-        //Menu();
+        Menu();
     }
 
     private static void Menu()
