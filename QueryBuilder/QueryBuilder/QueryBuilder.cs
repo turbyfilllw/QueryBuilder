@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using System.Text;
 using Microsoft.Data.Sqlite;
 using QueryBuilder.Models;
 
@@ -24,12 +26,61 @@ namespace QueryBuilder
 			connection.Open();
 		}
 
-		/// <summary>
-		/// Reads all content from a database
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		public List<T> ReadAll<T>() where T: IClassModels, new()
+
+
+		public void Create<T>(T obj) where T : IClassModels, new()
+		{
+			var command = connection.CreateCommand();
+			PropertyInfo[] properties = typeof(T).GetProperties();
+			List<string> values = new List<string>();
+			List<string> names = new List<string>();
+
+			// loop through the properties of each object
+			foreach(PropertyInfo property in properties)
+			{
+				if(property.PropertyType == typeof(string))
+				{
+					values.Add("\"" + property.GetValue(obj) + "\"");
+				}
+				else
+				{
+					values.Add(property.GetValue(obj).ToString());
+				}
+				
+				names.Add(property.Name);
+			}
+
+			StringBuilder sbValues = new StringBuilder();
+            StringBuilder sbNames = new StringBuilder();
+
+			for(int i = 0; i < values.Count; i++)
+			{
+				// do not add a comma after the last value
+				if (i == values.Count - 1)
+				{
+                    sbValues.Append($"{values[i]}");
+                    sbNames.Append($"{names[i]}");
+				}
+				else
+				{
+                    sbValues.Append($"{values[i]}, ");
+                    sbNames.Append($"{names[i]}, ");
+                }
+			}
+
+			command.CommandText = $"INSERT INTO {typeof(T).Name} ({sbNames}) VALUES ({sbValues})";
+
+			//Console.WriteLine($"INSERT INTO {typeof(T).Name} ({sbNames}) VALUES ({sbValues});");
+			command.ExecuteNonQuery();
+        }
+
+
+        /// <summary>
+        /// Reads all content from a database
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public List<T> ReadAll<T>() where T: IClassModels, new()
 		{
 			var dataString = "";
 			var command = connection.CreateCommand();
@@ -128,6 +179,7 @@ namespace QueryBuilder
 		/// <typeparam name="T"></typeparam>
 		public void Delete<T>() where T : IClassModels, new()
 		{
+			// DELETE FROM {typeof(T).Name} WHERE Id = {obj.Id}
 			var command = connection.CreateCommand();
 			command.CommandText = $"DELETE FROM {typeof(T).Name}";
 
