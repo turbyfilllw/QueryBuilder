@@ -72,6 +72,7 @@ namespace QueryBuilder
 
 			//Console.WriteLine($"INSERT INTO {typeof(T).Name} ({sbNames}) VALUES ({sbValues});");
 			command.ExecuteNonQuery();
+			Console.WriteLine("Record has been added.");
         }
 
 
@@ -177,14 +178,67 @@ namespace QueryBuilder
 		/// Deletes a table from the database
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		public void Delete<T>() where T : IClassModels, new()
+		public void Delete<T>(T obj) where T : IClassModels, new()
 		{
-			// DELETE FROM {typeof(T).Name} WHERE Id = {obj.Id}
 			var command = connection.CreateCommand();
-			command.CommandText = $"DELETE FROM {typeof(T).Name}";
+			command.CommandText = $"DELETE FROM {typeof(T).Name} WHERE Id = {obj.Id}";
 
 			command.CommandType = System.Data.CommandType.Text;
 			command.ExecuteNonQuery();
+			Console.WriteLine("Entry deleted.");
+		}
+
+		public void Update<T>(T obj) where T : IClassModels, new()
+		{
+			var command = connection.CreateCommand();
+			PropertyInfo[] properties = typeof(T).GetProperties();
+			List<string> values = new List<string>();
+			List<string> names = new List<string>();
+
+			// loop through the properties of each object
+			foreach (PropertyInfo property in properties)
+			{
+				if (property.PropertyType == typeof(string))
+				{
+					values.Add("\"" + property.GetValue(obj) + "\"");
+				}
+				else
+				{
+					values.Add(property.GetValue(obj).ToString());
+				}
+
+				names.Add(property.Name);
+			}
+
+			StringBuilder sbValues = new StringBuilder();
+			StringBuilder sbNames = new StringBuilder();
+
+			for (int i = 0; i < values.Count; i++)
+			{
+				// do not add a comma after the last value
+				if (i == values.Count - 1)
+				{
+					sbValues.Append($"{values[i]}");
+					sbNames.Append($"{names[i]}");
+				}
+				else
+				{
+					sbValues.Append($"{values[i]}, ");
+					sbNames.Append($"{names[i]}, ");
+				}
+			}
+			foreach(var name in names)
+			{
+				for (int i = 0; i < values.Count; i++)
+				{
+                    Console.WriteLine($"UPDATE {typeof(T).Name} SET {name}={values[i]} WHERE Id = {obj.Id}");
+                }
+                
+
+            }
+            command.CommandText = $"UPDATE {typeof(T).Name} SET ({sbValues}) WHERE Id = {obj.Id}";
+			//Console.WriteLine($"UPDATE {typeof(T).Name} SET {names[0]}= WHERE Id = {obj.Id}");
+			//command.ExecuteNonQuery();
 		}
 
 		/// <summary>
@@ -192,7 +246,7 @@ namespace QueryBuilder
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="Id"></param>
-		public void Update(Author a, int Id)
+		public void Update<T>(Author a, int Id) where T : IClassModels, new()
 		{
 			var commandText = @"UPDATE Author
 								SET Id = $Id,

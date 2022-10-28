@@ -8,42 +8,26 @@ public class Program
     
     static void Main(String[] args)
     {
-        List<Author> authors1 = new List<Author>();
-        using (var builder = new QueryBuilder.QueryBuilder(connection))
-        {
-            var users = builder.ReadAll<Users>();
-            var books = builder.ReadAll<Books>();
-            var authors = builder.ReadAll<Author>();
-            var categories = builder.ReadAll<Categories>();
-            var loans = builder.ReadAll<BooksOutOnLoan>();
-            Author a = new Author(99,"Stephen", "King");
-            builder.Create<Author>(a);
-
-            authors = builder.ReadAll<Author>();
-            //Author a = new Author(6, "Logan", "Turbyfill");
-
-
-            //builder.Create(a);
-            //authors = builder.ReadAll<Author>();
+        //using (var builder = new QueryBuilder.QueryBuilder(connection))
+        //{
+        //    var users = builder.ReadAll<Users>();
+        //    var books = builder.ReadAll<Books>();
+        //    var authors = builder.ReadAll<Author>();
+        //    var categories = builder.ReadAll<Categories>();
+        //    var loans = builder.ReadAll<BooksOutOnLoan>();
             
-            //GetAllAuthors(authors);
+        //}
 
-            //a = new Author(6, "LoBAN", "TurbyHILL");
-            //builder.Update(a, 6);
-          //  authors = builder.ReadAll<Author>();
-          //  GetAllAuthors(authors);
-        }
 
-        //Console.WriteLine("Press a key to enter the menu...");
-        Console.ReadKey();
-        //Menu();
+        //Console.ReadKey();
+        Console.WriteLine("ALL VALUES TO ADD OR DELETE ARE HARDCODED FOR EXAMPLE");
+        MoveOn();
+        Menu();
     }
 
     private static void Menu()
     {
         bool menu = true;
-        int entry;
-        
         using (var builder = new QueryBuilder.QueryBuilder(connection))
         {
             var users = builder.ReadAll<Users>();
@@ -51,144 +35,152 @@ public class Program
             var authors = builder.ReadAll<Author>();
             var categories = builder.ReadAll<Categories>();
             var loans = builder.ReadAll<BooksOutOnLoan>();
-            
+
+            Users u = new Users(6, "myusername", "my address", "my details", 3, "my email", "my phone number");
+            Books b = new Books(6, "Book title", "book isbn", "book date");
+            Author a = new Author(6, "Author first name", "author surname");
+            Categories c = new Categories(6, "category name");
+            BooksOutOnLoan booksOut = new BooksOutOnLoan(6, 6, "date issued", "due date", "date returned");
 
             while (menu)
             {
-                Console.WriteLine($"1. Display everything in the database\n" +
-                                  $"2. Display all users in the database\n" +
-                                  $"3. Display all books in the database\n" +
-                                  $"4. Display all authors in the database\n" +
-                                  $"5. Display all categories in the database\n" +
-                                  $"6. Display all books on loan in the database\n" +
-                                  $"7. Get a specific entry in the database\n" +
-                                  $"8. Delete a table from the database\n" +
-                                  $"9. Exit");
-
+                Console.WriteLine($"1. Create\n" +
+                                  $"2. Read\n" +
+                                  $"3. Update\n" +
+                                  $"4. Delete\n"+
+                                  $"5. Display everything\n" +
+                                  $"6. Exit");
                 var choice = Convert.ToInt32(Console.ReadLine());
+
                 switch (choice)
                 {
                     case 1:
-                        GetAllFromDB(users, books, authors, categories, loans);
-                        MoveOn();
+                        Console.Clear();
+                        Console.WriteLine("Which class?\n1. Users\n2. Books\n3. Author\n4. Categories\n5. Books on loan\n6. Exit");
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        
+                        switch (choice)
+                        {
+                            case 1:
+                                Console.Clear();
+                                builder.Create<Users>(u);
+                                MoveOn();
+                                break;
+
+                            case 2:
+                                Console.Clear();
+                                builder.Create<Books>(b);
+                                MoveOn();
+                                break;
+                            case 3:
+                                Console.Clear();
+                                builder.Create<Author>(a);
+                                MoveOn();
+                                break;
+                            case 4:
+                                Console.Clear();
+                                builder.Create<Categories>(c);
+                                MoveOn();
+                                break;
+                            case 5:
+                                Console.Clear();
+                                builder.Create<BooksOutOnLoan>(booksOut);
+                                MoveOn();
+                                break;
+                            case 6:
+                                break;
+
+                        }
                         break;
                     case 2:
-                        GetAllUsers(users);
-                        MoveOn();
+                        Console.Clear();
+                        Console.WriteLine("Which class?\n1. Users\n2. Books\n3. Author\n4. Categories\n5. Books on loan\n6. Exit");
+                        choice = Convert.ToInt32(Console.ReadLine());
+
+                        switch (choice)
+                        {
+                            case 1:
+                                Console.Clear();
+                                Console.WriteLine(builder.Read<Users>(3));
+                                MoveOn();
+                                break;
+
+                            case 2:
+                                Console.Clear();
+                                Console.WriteLine(builder.Read<Books>(3));
+                                MoveOn();
+                                break;
+                            case 3:
+                                Console.Clear();
+                                Console.WriteLine(builder.Read<Author>(5));
+                                MoveOn();
+                                break;
+                            case 4:
+                                Console.Clear();
+                                Console.WriteLine(builder.Read<Categories>(2));
+                                MoveOn();
+                                break;
+                            case 5:
+                                Console.Clear();
+                                Console.WriteLine(builder.Read<BooksOutOnLoan>(1));
+                                MoveOn();
+                                break;
+                            case 6:
+                                break;
+                        }
                         break;
                     case 3:
-                        GetAllBooks(books);
+                        Console.Clear();
+                        a = new Author(6, "updated author", "updated surname");
+                        builder.Update<Author>(a,6);
                         MoveOn();
                         break;
                     case 4:
-                        GetAllAuthors(authors);
-                        MoveOn();
+                        Console.Clear();
+                        Console.WriteLine("Which class?\n1. Users\n2. Books\n3. Author\n4. Categories\n5. Books on loan\n6. Exit");
+                        choice = Convert.ToInt32(Console.ReadLine());
+
+                        switch (choice)
+                        {
+                            case 1:
+                                Console.Clear();
+                                builder.Delete<Users>(u);
+                                MoveOn();
+                                break;
+
+                            case 2:
+                                Console.Clear();
+                                builder.Delete<Books>(b);
+                                MoveOn();
+                                break;
+                            case 3:
+                                Console.Clear();
+                                builder.Delete<Author>(a);
+                                MoveOn();
+                                break;
+                            case 4:
+                                Console.Clear();
+                                builder.Delete<Categories>(c);
+                                MoveOn();
+                                break;
+                            case 5:
+                                Console.Clear();
+                                builder.Delete<BooksOutOnLoan>(booksOut);
+                                MoveOn();
+                                break;
+                            case 6:
+                                break;
+                        }
                         break;
                     case 5:
-                        GetAllCategories(categories);
+                        GetAllFromDB(users, books, authors, categories, loans);
                         MoveOn();
                         break;
                     case 6:
-                        GetBooksOnLoan(loans);
-                        MoveOn();
-                        break;
-                    case 7:
-                        Console.WriteLine($"Which class?\n" +
-                                          $"1. Users\n" +
-                                          $"2. Books\n" +
-                                          $"3. Authors\n" +
-                                          $"4. Categories\n" +
-                                          $"5. Books on loan\n");
-
-                        choice = Convert.ToInt32(Console.ReadLine());
-                        switch (choice)
-                        {
-                            case 1:
-                                Console.Clear();
-                                Console.WriteLine("Which entry?: ");
-                                entry = Convert.ToInt32(Console.ReadLine());
-                                GetSpecificEntry<Users>(builder, entry);
-                                break;
-                            case 2:
-                                Console.Clear();
-                                Console.WriteLine("Which entry?: ");
-                                entry = Convert.ToInt32(Console.ReadLine());
-                                GetSpecificEntry<Books>(builder, entry);
-                                break;
-                            case 3:
-                                Console.Clear();
-                                Console.WriteLine("Which entry?: ");
-                                entry = Convert.ToInt32(Console.ReadLine());
-                                GetSpecificEntry<Author>(builder, entry);
-                                break;
-                            case 4:
-                                Console.Clear();
-                                Console.WriteLine("Which entry?: ");
-                                entry = Convert.ToInt32(Console.ReadLine());
-                                GetSpecificEntry<Categories>(builder, entry);
-                                break;
-                            case 5:
-                                Console.Clear();
-                                Console.WriteLine("Which entry?: ");
-                                entry = Convert.ToInt32(Console.ReadLine());
-                                GetSpecificEntry<BooksOutOnLoan>(builder, entry);
-                                break;
-                            default:
-                                Console.Clear();
-                                Console.WriteLine("Out of range");
-                                break;
-                        }
-                        MoveOn();
-                        break;
-                    case 8:
-                        Console.WriteLine($"Which class?\n" +
-                                          $"1. Users\n" +
-                                          $"2. Books\n" +
-                                          $"3. Authors\n" +
-                                          $"4. Categories\n" +
-                                          $"5. Books on loan\n");
-
-                        choice = Convert.ToInt32(Console.ReadLine());
-                        switch (choice)
-                        {
-                            case 1:
-                                Console.Clear();
-                                DeleteFromDatabase<Users>(builder);
-                                Console.WriteLine("Entry has been deleted...");
-                                break;
-                            case 2:
-                                Console.Clear();
-                                DeleteFromDatabase<Books>(builder);
-                                Console.WriteLine("Entry has been deleted...");
-                                break;
-                            case 3:
-                                Console.Clear();
-                                DeleteFromDatabase<Author>(builder);
-                                Console.WriteLine("Entry has been deleted...");
-                                break;
-                            case 4:
-                                Console.Clear();
-                                DeleteFromDatabase<Categories>(builder);
-                                Console.WriteLine("Entry has been deleted...");
-                                break;
-                            case 5:
-                                Console.Clear();
-                                DeleteFromDatabase<BooksOutOnLoan>(builder);
-                                Console.WriteLine("Entry has been deleted...");
-                                break;
-                            default:
-                                Console.Clear();
-                                Console.WriteLine("Out of range");
-                                break;
-                        }
-                        MoveOn();
-                        break;
-                    case 9:
                         menu = false;
                         break;
                     default:
-                        Console.WriteLine("Invalid Entry");
-                        MoveOn();
+                        Console.WriteLine("Out of range");
                         break;
                 }
             }
@@ -207,11 +199,6 @@ public class Program
         GetAllCategories(categories);
         Console.WriteLine("------------------------------");
         GetBooksOnLoan(loans);
-    }
-
-    private static void DeleteFromDatabase<T>(QueryBuilder.QueryBuilder builder) where T : IClassModels, new()
-    {
-        builder.Delete<T>();
     }
 
     private static void GetSpecificEntry<T>(QueryBuilder.QueryBuilder builder, int Id) where T : IClassModels, new()
