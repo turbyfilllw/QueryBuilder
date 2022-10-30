@@ -8,18 +8,6 @@ public class Program
     
     static void Main(String[] args)
     {
-        //using (var builder = new QueryBuilder.QueryBuilder(connection))
-        //{
-        //    var users = builder.ReadAll<Users>();
-        //    var books = builder.ReadAll<Books>();
-        //    var authors = builder.ReadAll<Author>();
-        //    var categories = builder.ReadAll<Categories>();
-        //    var loans = builder.ReadAll<BooksOutOnLoan>();
-            
-        //}
-
-
-        //Console.ReadKey();
         Console.WriteLine("ALL VALUES TO ADD OR DELETE ARE HARDCODED FOR EXAMPLE");
         MoveOn();
         Menu();
@@ -131,8 +119,8 @@ public class Program
                         break;
                     case 3:
                         Console.Clear();
-                        a = new Author(6, "updated author", "updated surname");
-                        builder.Update<Author>(a,6);
+                        a = new Author(5, "updated author", "updated surname");
+                        builder.Update<Author>(a,5);
                         MoveOn();
                         break;
                     case 4:
