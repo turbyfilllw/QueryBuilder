@@ -1,13 +1,9 @@
 ﻿<Properties StartupConfiguration="{3D6D5D69-C37A-4C40-9ABE-656455E180C1}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="QueryBuilder/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="QueryBuilder/QueryBuilder.cs">
     <Files>
-      <File FileName="QueryBuilder/Program.cs" Line="16" Column="62" />
-      <File FileName="QueryBuilder/QueryBuilder.cs" Line="249" Column="41" />
+      <File FileName="QueryBuilder/Program.cs" Line="21" Column="1" />
+      <File FileName="QueryBuilder/QueryBuilder.cs" Line="172" Column="14" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,7 +12,7 @@
             <Node name="QueryBuilder" expanded="True">
               <Node name="Data" expanded="True" />
               <Node name="Models" expanded="True" />
-              <Node name="Program.cs" selected="True" />
+              <Node name="QueryBuilder.cs" selected="True" />
             </Node>
           </Node>
         </State>
@@ -24,5 +20,9 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.QueryBuilder PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>
