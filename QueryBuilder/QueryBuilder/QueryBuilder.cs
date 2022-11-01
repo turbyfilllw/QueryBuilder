@@ -229,6 +229,7 @@ namespace QueryBuilder
 			}
 			
             command.CommandText = $"UPDATE {typeof(T).Name} SET ({sbNames}) = ({sbValues}) WHERE Id = {obj.Id}";
+			Console.WriteLine("Entry updated.");
 			command.ExecuteNonQuery();
 		}
 
