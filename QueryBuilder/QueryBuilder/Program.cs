@@ -120,7 +120,7 @@ public class Program
                     case 3:
                         Console.Clear();
                         a = new Author(5, "updated author", "updated surname");
-                        builder.Update<Author>(a,5);
+                        builder.Update<Author>(a);
                         MoveOn();
                         break;
                     case 4:

@@ -227,18 +227,9 @@ namespace QueryBuilder
 					sbNames.Append($"{names[i]}, ");
 				}
 			}
-			foreach(var name in names)
-			{
-				for (int i = 0; i < values.Count; i++)
-				{
-                    Console.WriteLine($"UPDATE {typeof(T).Name} SET {name}={values[i]} WHERE Id = {obj.Id}");
-                }
-                
-
-            }
-            command.CommandText = $"UPDATE {typeof(T).Name} SET ({sbValues}) WHERE Id = {obj.Id}";
-			//Console.WriteLine($"UPDATE {typeof(T).Name} SET {names[0]}= WHERE Id = {obj.Id}");
-			//command.ExecuteNonQuery();
+			
+            command.CommandText = $"UPDATE {typeof(T).Name} SET ({sbNames}) = ({sbValues}) WHERE Id = {obj.Id}";
+			command.ExecuteNonQuery();
 		}
 
 		/// <summary>
@@ -246,6 +237,7 @@ namespace QueryBuilder
 		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="Id"></param>
+		/// 
 		public void Update<T>(Author a, int Id) where T : IClassModels, new()
 		{
 			var commandText = @"UPDATE Author
