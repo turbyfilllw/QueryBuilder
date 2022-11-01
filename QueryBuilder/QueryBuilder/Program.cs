@@ -8,12 +8,10 @@ public class Program
     
     static void Main(String[] args)
     {
-        Console.WriteLine("ALL VALUES TO ADD OR DELETE ARE HARDCODED FOR EXAMPLE");
-        MoveOn();
         Menu();
     }
 
-    private static void Menu()
+    private static void Menu() 
     {
         bool menu = true;
         using (var builder = new QueryBuilder.QueryBuilder(connection))
@@ -159,7 +157,6 @@ public class Program
                         }
                         //a = new Author(5, "updated author", "updated surname");
                         //builder.Update<Author>(a);
-                        MoveOn();
                         break;
                     case 4:
                         Console.Clear();
