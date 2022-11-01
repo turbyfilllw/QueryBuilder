@@ -119,8 +119,46 @@ public class Program
                         break;
                     case 3:
                         Console.Clear();
-                        a = new Author(5, "updated author", "updated surname");
-                        builder.Update<Author>(a);
+                        Console.WriteLine("Which class?\n1. Users\n2. Books\n3. Author\n4. Categories\n5. Books on loan\n6. Exit");
+                        choice = Convert.ToInt32(Console.ReadLine());
+                        switch (choice)
+                        {
+                            case 1:
+                                Console.Clear();
+                                u = new Users(5, "updated user", "updated address", "updated details", 3, "updated email", "updated phone");
+                                builder.Update<Users>(u);
+                                MoveOn();
+                                break;
+
+                            case 2:
+                                Console.Clear();
+                                b = new Books(5, "updated title", "updated isbn", "updated publication");
+                                builder.Update<Books>(b);
+                                MoveOn();
+                                break;
+                            case 3:
+                                Console.Clear();
+                                a = new Author(5, "updated author", "updated surname");
+                                builder.Update<Author>(a);
+                                MoveOn();
+                                break;
+                            case 4:
+                                Console.Clear();
+                                c = new Categories(5, "updated category");
+                                builder.Update<Categories>(c);
+                                MoveOn();
+                                break;
+                            case 5:
+                                Console.Clear();
+                                booksOut = new BooksOutOnLoan(5, 5, "updated book", "updated due date", "updated return date");
+                                builder.Update<BooksOutOnLoan>(booksOut);
+                                MoveOn();
+                                break;
+                            case 6:
+                                break;
+                        }
+                        //a = new Author(5, "updated author", "updated surname");
+                        //builder.Update<Author>(a);
                         MoveOn();
                         break;
                     case 4:
